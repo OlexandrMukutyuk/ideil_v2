@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal("purse");
             $table->string("login");
             $table->string("password");
+            $table->string('roles')->default('user');
         });
     }
 

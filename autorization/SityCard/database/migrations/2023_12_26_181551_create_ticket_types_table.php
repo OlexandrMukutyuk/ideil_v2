@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('bus_type');
             $table->decimal('cost');
+            $table->string('City');
             $table->timestamps();
         });
     }

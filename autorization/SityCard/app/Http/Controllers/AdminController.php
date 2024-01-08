@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\payment;
 use App\Models\history;
-use App\Models\ticket_type;
+use App\Models\TicketType;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -15,13 +15,13 @@ class AdminController extends Controller
 
     public function index(){
 
-        $ticket_type_Data = ticket_type::all();
+        $ticket_type_Data = TicketType::all();
 
         return view("index_admin", ['ticket_type' => $ticket_type_Data]);
     }
 
     public function delete($id) {
-        $ticketType = ticket_type::find($id);
+        $ticketType = TicketType::find($id);
 
         if (!$ticketType) {
 
@@ -34,7 +34,7 @@ class AdminController extends Controller
     }
 
     public function update($id) {
-        $ticketType = ticket_type::find($id);
+        $ticketType = TicketType::find($id);
 
         if (!$ticketType) {
 
@@ -58,7 +58,7 @@ class AdminController extends Controller
             return redirect()->route('index_admin')->with('error', 'Невірні дані в запиті.');
         }
 
-        $ticketType = ticket_type::find($id);
+        $ticketType = TicketType::find($id);
 
         if (!$ticketType) {
             return redirect()->route('index_admin')->with('error', 'Запис не знайдено.');
@@ -76,7 +76,7 @@ class AdminController extends Controller
     public function create_confirm(){
         $data = request()->only(['bus_type', 'cost', 'City']);
 
-        ticket_type::create($data);
+        TicketType::create($data);
 
         return redirect()->route('index_admin')->with('success', 'Новий запис створено успішно.');
     }

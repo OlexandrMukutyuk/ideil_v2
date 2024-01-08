@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use App\Models\payment;
-use App\Models\history;
+use App\Models\BalanceReplenishmentHistory;
+use App\Models\ExpenseHistory;
 
 class HomeController extends Controller
 {
@@ -28,8 +28,8 @@ class HomeController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $secondTableData = payment::where('user_id', $userId)->get();
-        $historyData = History::with('ticket_type')->where('user_id', $userId)->get();
+        $secondTableData = BalanceReplenishmentHistory::where('user_id', $userId)->get();
+        $historyData = ExpenseHistory::with('ticket_type')->where('user_id', $userId)->get();
 
         $user = Auth::user();
         return view('home', ['user' => $user, 'secondTableData' => $secondTableData, 'historyData' => $historyData]);
